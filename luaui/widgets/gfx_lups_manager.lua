@@ -14,13 +14,15 @@ function widget:GetInfo()
     name      = "LupsManager",
     desc      = "",
     author    = "jK",
-    date      = "Feb, 2008",
+    date      = "Feb, 2008, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = 10,
     enabled   = true,
     handler   = true,
   }
 end
+
+local emptyTable = {}
 
 
 include("Configs/lupsFXs.lua")
@@ -32,7 +34,7 @@ local function MergeTable(table1,table2)
   local result = {}
   for i,v in pairs(table2) do 
     if (type(v)=='table') then
-      result[i] = MergeTable(v,{})
+      result[i] = MergeTable(v, emptyTable)
     else
       result[i] = v
     end

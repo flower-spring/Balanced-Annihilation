@@ -5,13 +5,15 @@ function widget:GetInfo()
     name      = "Area Mex",
     desc      = versionNumber .. " Adds a command to cap mexes in an area.",
     author    = "Google Frog, NTG (file handling), Chojin (metal map), Doo Edit on Dec 13, 2017 (multiple enhancements)",
-    date      = "Oct 23, 2010",
+    date      = "Oct 23, 2010, oct 2020",
     license   = "GNU GPL, v2 or later",
     handler   = true,
     layer     = 0,
     enabled   = true  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 --changelog (starting from 2.4)
 -- v2.5 (21/04/2018)
@@ -238,7 +240,7 @@ function widget:CommandNotify(id, params, options)
 					batchMexBuilder[batchSize] = id
 				else
 					if not shift then 
-						spGiveOrderToUnit(id, CMD.STOP, {} , CMD.OPT_RIGHT )
+						spGiveOrderToUnit(id, CMD.STOP, emptyTable , CMD.OPT_RIGHT )
 					end
 					spGiveOrderToUnit(id, CMD.GUARD, {lastprocessedbestbuilder} , {"shift"})
 				end
@@ -290,7 +292,7 @@ function widget:CommandNotify(id, params, options)
 		for ct=1,#batchMexBuilder do
 			local id = batchMexBuilder[ct]
 			if not shift then 
-				spGiveOrderToUnit(id, CMD.STOP, {} , CMD.OPT_RIGHT )
+				spGiveOrderToUnit(id, CMD.STOP, emptyTable , CMD.OPT_RIGHT )
 			end
 		end
 		

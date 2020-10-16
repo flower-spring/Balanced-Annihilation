@@ -3,13 +3,15 @@ function widget:GetInfo()
         name      = "EMP + decloak range",
         desc      = "When spy or gremlin is selected, it displays its decloack range (orange) and emp range (blue)",
         author    = "[teh]decay aka [teh]undertaker",
-        date      = "14 feb 2015",
+        date      = "14 feb 2015, oct 2020",
         license   = "The BSD License",
         layer     = 0,
         version   = 5,
         enabled   = true  -- loaded by default
     }
 end
+
+local emptyTable = {}
 
 -- project page on github: https://github.com/jamerlan/spy_range
 
@@ -80,13 +82,13 @@ local spectatorMode = false
 local notInSpecfullmode = false
 
 function cloackSpy(unitID)
-    spGiveOrderToUnit(unitID, cmdCloack, { 1 }, {})
+    spGiveOrderToUnit(unitID, cmdCloack, { 1 }, emptyTable)
 end
 
 function processGremlin(unitID)
-    spGiveOrderToUnit(unitID, cmdCloack, { 1 }, {})
-    spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 0 }, {}) -- 0 == hold pos
-    spGiveOrderToUnit(unitID, cmdFireState, { 0 }, {}) -- hold fire
+    spGiveOrderToUnit(unitID, cmdCloack, { 1 }, emptyTable)
+    spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 0 }, emptyTable) -- 0 == hold pos
+    spGiveOrderToUnit(unitID, cmdFireState, { 0 }, emptyTable) -- hold fire
 end
 
 function isSpy(unitDefID)

@@ -16,12 +16,14 @@ function widget:GetInfo()
     name      = "Factory Auto-Repeat",
     desc      = "Sets new factories to Repeat on automatically",
     author    = "TheFatController",
-    date      = "Mar 20, 2007",
+    date      = "Mar 20, 2007, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
     enabled   = false  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -38,7 +40,7 @@ end
 function widget:UnitFinished(unitID, unitDefID, unitTeam)
  local ud = UnitDefs[unitDefID]
  if (ud and ud.isFactory) then
-   Spring.GiveOrderToUnit(unitID, CMD.REPEAT, { 1 }, {})
+   Spring.GiveOrderToUnit(unitID, CMD.REPEAT, { 1 }, emptyTable)
  end
 end
 

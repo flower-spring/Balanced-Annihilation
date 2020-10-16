@@ -4,13 +4,15 @@ function widget:GetInfo()
 	name      = "Red Build/Order Menu",
 	desc      = "Requires Red UI Framework",
 	author    = "Regret",
-	date      = "29 may 2015",
+	date      = "29 may 2015, oct 2020",
 	license   = "GNU GPL, v2 or later",
 	layer     = 0,
 	enabled   = true, --enabled by default
 	handler   = true, --can use widgetHandler:x()
 	}
 end
+
+local emptyTable = {}
 
 local stateTexture		= LUAUI_DIRNAME.."Images/resbar.dds"
 local buttonTexture		= LUAUI_DIRNAME.."Images/button.dds"
@@ -711,7 +713,7 @@ local function hijacklayout()
 		widgetHandler:CommandsChanged() --call widget:CommandsChanged()
 		local iconList = {[1337]=9001}
 			local custom_cmdz = widgetHandler.customCommands
-		return "", xIcons, yIcons, {}, custom_cmdz, {}, {}, {}, {}, {}, iconList
+		return "", xIcons, yIcons, emptyTable, custom_cmdz, emptyTable, emptyTable, emptyTable, emptyTable, emptyTable, iconList
 	end
 	widgetHandler:ConfigLayoutHandler(dummylayouthandler) --override default build/ordermenu layout
 	Spring.ForceLayoutUpdate()
@@ -760,7 +762,7 @@ function widget:Update(dt)
 	end
 	if (updatehax2) then
 		if (SelectedUnitsCount == 0) then
-			onNewCommands({},{}) --flush
+			onNewCommands({}, emptyTable) --flush
 			updatehax2 = false
 		end
 	end

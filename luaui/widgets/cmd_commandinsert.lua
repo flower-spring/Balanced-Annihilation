@@ -6,12 +6,14 @@ function widget:GetInfo()
     name = "CommandInsert",
     desc = "When pressing spacebar and shift, you can insert commands to arbitrary places in queue. When pressing spacebar alone, commands are inserted on front of queue. Based on FrontInsert by jK",
     author = "dizekat",
-    date = "Jan,2008",
+    date = "Jan,2008, oct 2020",
     license = "GNU GPL, v2 or later",
     layer = 5,
     enabled = true
   }
 end
+
+--local emptyTable = {}
 
 --[[
 -- use this for debugging:
@@ -37,7 +39,7 @@ function table.key_to_str ( k )
 end
 
 function table.tostring( tbl )
-  local result, done = {}, {}
+  local result, done = {}, emptyTable
   for k, v in ipairs( tbl ) do
     table.insert( result, table.val_to_str( v ) )
     done[ k ] = true

@@ -6,12 +6,14 @@ function widget:GetInfo()
     name      = "DontMove",
     desc      = "Sets pre-defined units on hold position.",
     author    = "quantum",
-    date      = "Jan 8, 2007",
+    date      = "Jan 8, 2007, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
     enabled   = true  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 
 --------------------------------------------------------------------------------
@@ -133,7 +135,7 @@ function widget:UnitFromFactory(unitID, unitDefID, unitTeam)
   local ud = UnitDefs[unitDefID]
   if ((ud ~= nil) and (unitTeam == Spring.GetMyTeamID())) then
     if (unitSet[ud.name]) then
-      Spring.GiveOrderToUnit(unitID, CMD.MOVE_STATE, { 0 }, {})
+      Spring.GiveOrderToUnit(unitID, CMD.MOVE_STATE, { 0 }, emptyTable)
     end 
   end
 end

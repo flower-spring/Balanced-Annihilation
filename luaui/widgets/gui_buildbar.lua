@@ -5,12 +5,14 @@ function widget:GetInfo()
     name      = "BuildBar",
     desc      = "An extended BuildMenu to access the BuildOptions of factories\neverywhere on the map without selecting them before",
     author    = "jK",
-    date      = "Jul 11, 2007",
+    date      = "Jul 11, 2007, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
     enabled   = false  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 
 -------------------------------------------------------------------------------
@@ -855,7 +857,7 @@ function MenuHandler(x,y,button)
       local ustate = GetUnitStates(unitID)
       local onoff  = {1}
       if ustate ~= nil and ustate["repeat"] then onoff = {0} end
-      Spring.GiveOrderToUnit(unitID, CMD.REPEAT, onoff, { })
+      Spring.GiveOrderToUnit(unitID, CMD.REPEAT, onoff, emptyTable)
       Spring.PlaySoundFile(sound_click, 0.97)
     else--if (bar_openByClick) then
       if (not menuHovered)and(openedMenu == pressedFac) then
@@ -894,11 +896,11 @@ function BuildHandler(button)
   if shift then push(opt,"shift") end
 
   if button==1 then
-    Spring.GiveOrderToUnit(facs[openedMenu+1].unitID, -(facs[openedMenu+1].buildList[pressedBOpt+1]),{},opt)
+    Spring.GiveOrderToUnit(facs[openedMenu+1].unitID, -(facs[openedMenu+1].buildList[pressedBOpt+1]), emptyTable,opt)
     Spring.PlaySoundFile(sound_queue_add, 0.95)
   elseif button==3 then
     push(opt,"right")
-    Spring.GiveOrderToUnit(facs[openedMenu+1].unitID, -(facs[openedMenu+1].buildList[pressedBOpt+1]),{},opt)
+    Spring.GiveOrderToUnit(facs[openedMenu+1].unitID, -(facs[openedMenu+1].buildList[pressedBOpt+1]), emptyTable,opt)
     Spring.PlaySoundFile(sound_queue_rem, 0.97)
   end
 end

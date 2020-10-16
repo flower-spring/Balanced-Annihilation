@@ -16,12 +16,14 @@ function widget:GetInfo()
     name      = "Display DPS",
     desc      = "Displays damage per second done to your allies units v2.1",
     author    = "TheFatController",
-    date      = "May 27, 2008",
+    date      = "May 27, 2008, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
     enabled   = false  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -88,7 +90,7 @@ local function getTextSize(damage, paralyze)
 end
 
 local function displayDamage(unitID, unitDefID, damage, paralyze)
-  table.insert(damageTable,1,{})
+  table.insert(damageTable,1, emptyTable)
   damageTable[1].unitID = unitID
   damageTable[1].damage = math.ceil(damage - 0.5)
   damageTable[1].height = unitHeight(unitDefID)
@@ -105,7 +107,7 @@ function widget:UnitDestroyed(unitID, unitDefID, unitTeam)
   if unitDamage[unitID] then
     local ux, uy, uz = GetUnitViewPosition(unitID)
     if ux ~= nil then
-      table.insert(deadList,1,{})
+      table.insert(deadList,1, emptyTable)
       local damage = math.ceil(unitDamage[unitID].damage - 0.5)
       deadList[1].x = ux
       deadList[1].y = (uy + unitHeight(unitDefID))
@@ -125,7 +127,7 @@ function widget:UnitDestroyed(unitID, unitDefID, unitTeam)
       if not v.paralyze then
         local ux, uy, uz = GetUnitViewPosition(unitID)
         if ux ~= nil then
-          table.insert(deadList,1,{})
+          table.insert(deadList,1, emptyTable)
           deadList[1].x = ux + v.offset
           deadList[1].y = uy + v.height + v.heightOffset
           deadList[1].z = uz

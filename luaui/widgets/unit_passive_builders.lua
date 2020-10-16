@@ -3,13 +3,15 @@ function widget:GetInfo()
         name      = "Passive builders v5",
         desc      = "Allows to set builders (nanos, labs and cons) on passive mode",
         author    = "[teh]decay",
-        date      = "20 aug 2015",
+        date      = "20 aug 2015, oct 2020",
         license   = "GNU GPL, v2 or later",
         layer     = 0,
         version   = 5,
         enabled   = true  -- loaded by default
     }
 end
+
+local emptyTable = {}
 
 -- project page on github: https://github.com/SpringWidgets/passive-builders
 
@@ -93,11 +95,11 @@ local function isBuilder(ud)
 end
 
 local function passivateBuilder(unitID)
-    spGiveOrderToUnit(unitID, CMD_PASSIVE, {1}, {})
+    spGiveOrderToUnit(unitID, CMD_PASSIVE, {1}, emptyTable)
 end
 
 local function activateBuilder(unitID)
-    spGiveOrderToUnit(unitID, CMD_PASSIVE, {0}, {})
+    spGiveOrderToUnit(unitID, CMD_PASSIVE, {0}, emptyTable)
 end
 
 function widget:DrawScreen()

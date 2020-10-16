@@ -6,12 +6,14 @@ function widget:GetInfo()
     name      = "FactoryQ Manager",
     desc      = "Saves and Loads Factory Queues. Load: Meta+[0-9], Save: Alt+Meta+[0-9] (v" .. string.format("%.1f", versionNumber ) .. ")",
     author    = "very_bad_soldier",
-    date      = "Jul 6, 2008",
+    date      = "Jul 6, 2008, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = -9000,
     enabled   = false  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 --Changelog
 --1.4: fixed text alignment, changed layer cause other widgets are eating events otherwise (e.g. smartselect)  
@@ -185,7 +187,7 @@ function RemoveBuildOrders(unitID, buildDefID, count)
       opts = { "right" }
       count = count - 1
     end    
-    Spring.GiveOrderToUnit(unitID, -buildDefID, {}, opts)
+    Spring.GiveOrderToUnit(unitID, -buildDefID, emptyTable, opts)
   end
 end
 
@@ -322,7 +324,7 @@ function loadQueue( unitId, unitDef, groupNo )
 		if ( queue[facRepeatIdx] == false ) then 
 			repVal = 0 
 		end
-		Spring.GiveOrderToUnit(unitId, CMD.REPEAT, { repVal }, {})
+		Spring.GiveOrderToUnit(unitId, CMD.REPEAT, { repVal }, emptyTable)
 				
 		for k,cmd in ipairs(queue) do  --  in order
 			if (not cmd.options.internal) then

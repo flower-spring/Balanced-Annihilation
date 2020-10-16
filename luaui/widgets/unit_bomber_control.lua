@@ -3,12 +3,14 @@ function widget:GetInfo()
 		name	= "Bomber control",
 		desc	= "Makes bombers execute queue properly [v1.1]",
 		author	= "dizekat",
-		date	= "2010-02-04",
+		date	= "2010-02-04, oct 2020",
 		license	= "GPL v2 or later",
 		layer	= 5,
 		enabled	= true
 	}
 end
+
+local emptyTable = {}
 
 --fixed for 0.83 (by vbs)
 
@@ -128,7 +130,7 @@ function widget:Update(dt)
 						end
 						if got_next_orders then
 							--Spring.Echo(CMD[commands[2].id])
-							GiveOrderToUnit(bomber_id, CMD.REMOVE,{commands[1].tag},{})
+							GiveOrderToUnit(bomber_id, CMD.REMOVE,{commands[1].tag}, emptyTable)
 							local states=GetUnitStates(bomber_id)
 							if states and (states['repeat']) then
 								GiveOrderToUnit(bomber_id, commands[1].id,commands[1].params,{'shift'})

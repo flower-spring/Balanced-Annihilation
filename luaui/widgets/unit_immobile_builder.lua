@@ -15,12 +15,14 @@ function widget:GetInfo()
 	name		= "ImmobileBuilder",
 	desc		= "Sets immobile builders to MANEUVER, with a FIGHT command",
 	author		= "trepan",
-	date		= "Jan 8, 2007",
+	date		= "Jan 8, 2007, oct 2020",
 	license		= "GNU GPL, v2 or later",
 	layer		= 0,
 	enabled		= true  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -81,7 +83,7 @@ function widget:Initialize()
 	for _,unitID in ipairs(spGetTeamUnits(spGetMyTeamID())) do
 		local unitDefID = spGetUnitDefID(unitID)
 		if IsImmobileBuilder(UnitDefs[unitDefID]) then
-			spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 1 }, {})
+			spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 1 }, emptyTable)
 			SetupUnit(unitID)
 		end
 	end
@@ -93,7 +95,7 @@ function widget:UnitCreated(unitID, unitDefID, unitTeam)
 		return
 	end
 	if IsImmobileBuilder(UnitDefs[unitDefID]) then
-		spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 1 }, {})
+		spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 1 }, emptyTable)
 		SetupUnit(unitID)
 	end
 end

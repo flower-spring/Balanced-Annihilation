@@ -4,13 +4,15 @@ function widget:GetInfo()
 	name      = "Red_UI_Framework",
 	desc      = "Red UI Framework",
 	author    = "Regret (enhanced by Floris)",
-	date      = "29 may 2015",
+	date      = "29 may 2015, oct 2020",
 	license   = "GNU GPL, v2 or later",
 	layer     = -9999998, --lowest go first
 	enabled   = true, --loaded by default
 	handler   = true, --access to handler
 	}
 end
+
+local emptyTable = {}
 
 local fontfile ="LuaUI/Fonts/FreeSansBold.otf"
 local vsx,vsy = Spring.GetViewGeometry()
@@ -361,7 +363,7 @@ local function processEffects(o,CurClock)
 end
 
 --Mouse handling
-local Mouse = {{},{},{}}
+local Mouse = {{}, emptyTable, emptyTable}
 local sGetMouseState = Spring.GetMouseState
 
 local dropClick = false

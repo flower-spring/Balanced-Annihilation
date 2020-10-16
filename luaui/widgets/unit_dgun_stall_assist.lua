@@ -4,12 +4,14 @@ function widget:GetInfo()
 		name      = "DGun Stall Assist",
 		desc      = "Waits cons/facs when trying to dgun and stalling",
 		author    = "Niobium",
-		date      = "2 April 2010",
+		date      = "2 April 2010, oct 2020",
 		license   = "GNU GPL, v2 or later",
 		layer     = 0,
 		enabled   = true  --  loaded by default?
 	}
 end
+
+local emptyTable = {}
 
 ----------------------------------------------------------------
 -- Config
@@ -80,7 +82,7 @@ function widget:Update(dt)
 					toUnwait[#toUnwait + 1] = uID
 				end
 			end
-			spGiveOrderToUnitArray(toUnwait, CMD_WAIT, {}, {})
+			spGiveOrderToUnitArray(toUnwait, CMD_WAIT, emptyTable, emptyTable)
 			
 			waitedUnits = nil
 		end
@@ -109,7 +111,7 @@ function widget:Update(dt)
 					end
 				end
 			end
-			spGiveOrderToUnitArray(waitedUnits, CMD_WAIT, {}, {})
+			spGiveOrderToUnitArray(waitedUnits, CMD_WAIT, emptyTable, emptyTable)
 		end
 	end
 end

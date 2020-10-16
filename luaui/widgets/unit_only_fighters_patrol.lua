@@ -18,13 +18,15 @@ function widget:GetInfo()
 		name	= "OnlyFightersPatrol",
 		desc	= "Only fighters go on factory's patrol route after leaving airlab. Reduces lag.",
 		author	= "dizekat",
-		date	= "2008-04-22",
+		date	= "2008-04-22, oct 2020",
 		license	= "GNU GPL, v2 or later",
 		layer	= 0,
 		enabled	= false,
 		handler   = true
 	}
 end
+
+local emptyTable = {}
 
 local opts={
 stop_builders=true -- Whever to stop builders or not. Set to true if you dont use factory guard widget.
@@ -104,7 +106,7 @@ function widget:UnitFromFactory(unitID, unitDefID, unitTeam, factID, factDefID, 
 	local ud=UnitDefs[unitDefID]
 	--- liche: workaround for BA (liche is fighter)
 	if MustStop(unitID, unitDefID) then
-		Spring.GiveOrderToUnit(unitID,CMD.STOP,{},{})
+		Spring.GiveOrderToUnit(unitID,CMD.STOP, emptyTable, emptyTable)
 	else
 	--[[	
 		Spring.Echo("-----")

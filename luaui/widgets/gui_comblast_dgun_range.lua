@@ -3,12 +3,14 @@ function widget:GetInfo()
         name      = "Comblast & Dgun Range",
         desc      = "Shows the range of commander death explosion, geo when building, and hold fires crawlings",
         author    = "Bluestone, based on similar widgets by vbs, tfc, decay  (made fancy by Floris)",
-        date      = "14 february 2015",
+        date      = "14 february 2015, oct 2020",
         license   = "GPL v3 or later",
         layer     = 0,
         enabled   = true  -- loaded by default
     }
 end
+
+local emptyTable = {}
 
 -- project page on github: https://github.com/jamerlan/unit_crawling_bomb_range
 
@@ -82,10 +84,10 @@ local notInSpecfullmode = false
 function setBombStates(unitID, unitDefID)
 
 	if isHoldFire(unitDefID) then 
-		spGiveOrderToUnit(unitID, cmdFireState, { 0 }, {  })
+		spGiveOrderToUnit(unitID, cmdFireState, { 0 }, emptyTable)
 
 		--if unitDefID == coreAdvCrawlingId and cloakAdvCrawlingBombs then
-		--	spGiveOrderToUnit(unitID, cmdCloack, { 1 }, {})
+		--	spGiveOrderToUnit(unitID, cmdCloack, { 1 }, emptyTable)
 		--end
 	end
 end

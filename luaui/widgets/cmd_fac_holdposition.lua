@@ -16,12 +16,14 @@ function widget:GetInfo()
     name      = "Factory hold position",
     desc      = "Sets new factories, and all units they build, to hold position automatically (except aircraft)",
     author    = "Masta Ali",
-    date      = "Mar 20, 2007",
+    date      = "Mar 20, 2007, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
     enabled   = false  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -74,7 +76,7 @@ function widget:UnitCreated(unitID, unitDefID, unitTeam)
    if ((ud ~= nil) and (unitTeam == Spring.GetMyTeamID())) then
     for i, v in pairs(unitSet) do
       if (unitSet[ud.name]) then
-        Spring.GiveOrderToUnit(unitID, CMD.MOVE_STATE, { 0 }, {})
+        Spring.GiveOrderToUnit(unitID, CMD.MOVE_STATE, { 0 }, emptyTable)
       end
     end
   end

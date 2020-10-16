@@ -7,12 +7,14 @@ function widget:GetInfo()
 		version   = 4,
 		desc      = "Creates projectile, laser and explosion lights and sends them to the deferred renderer.",
 		author    = "Floris (original by beherith)",
-		date      = "May 2017",
+		date      = "May 2017, oct 2020",
 		license   = "GPL V2",
 		layer     = 99999,
 		enabled   = true,
 	}
 end
+
+local emptyTable = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -29,7 +31,7 @@ local spGetProjectileVelocity     = Spring.GetProjectileVelocity
 --------------------------------------------------------------------------------
 -- Local Variables
 local previousProjectileDrawParams
-local fadeProjectiles, fadeProjectileTimes = {}, {}
+local fadeProjectiles, fadeProjectileTimes = {}, emptyTable
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -502,7 +504,7 @@ end
 local function GetProjectileLights(beamLights, beamLightCount, pointLights, pointLightCount)
 	local cx, cy, cz = Spring.GetCameraPosition()
 
-    if not enableDeferred then return {}, 0, {}, 0 end
+    if not enableDeferred then return {}, 0, emptyTable, 0 end
 
 	local projectiles = spGetVisibleProjectiles()
 	local projectileCount = #projectiles

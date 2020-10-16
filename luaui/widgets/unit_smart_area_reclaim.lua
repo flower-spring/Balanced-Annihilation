@@ -16,12 +16,14 @@ function widget:GetInfo()
 		name      = "SmartAreaReclaim",
 		desc      = "Area reclaims only metal or energy depending on the center feature",
 		author    = "aegis",
-		date      = "Jun 25, 2010",
+		date      = "Jun 25, 2010, oct 2020",
 		license   = "Public Domain",
 		layer     = 0,
 		enabled   = true
 	}
 end
+
+local emptyTable = {}
 
 -----------------------------------------------------------------
 -- manually generated locals because I don't have trepan's script
@@ -138,7 +140,7 @@ end
 
 function widget:CommandNotify(id, params, options)
 	if (id == RECLAIM) then
-		local mobiles, stationaries = {}, {}
+		local mobiles, stationaries = {}, emptyTable
 		local mobileb, stationaryb = false, false
 		
 		local rUnits = {}
@@ -210,7 +212,7 @@ function widget:CommandNotify(id, params, options)
 					local mr, _, er, _, _ = GetFeatureResources(cu)
 					-- if (mr > 0)and(er > 0) then return end
 					
-					local mList, sList = {}, {}
+					local mList, sList = {}, emptyTable
 					local source = {}
 					
 					if (#rmt > 0)and(mr > 0) then

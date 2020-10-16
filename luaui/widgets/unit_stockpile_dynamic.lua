@@ -20,12 +20,14 @@ function widget:GetInfo()
     name      = "Stockpiler (dynamic)",
     desc      = "keeps stockpiled units at max " .. MaxStockpile .. " in storage",
     author    = "BD",
-    date      = "tomorrow",
+    date      = "tomorrow, oct 2020",
     license   = "WTFPL",
     layer     = 0,
     enabled   = true,  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 local GetTeamUnits 		= Spring.GetTeamUnits
 local GetMyTeamID		= Spring.GetMyTeamID
@@ -90,16 +92,16 @@ function DoStockPile( unitID )
 		local count = stock + queued - MaxStockpile
 		while ( count < 0 ) do
 			if (count < -100) then
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "ctrl", "shift" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "ctrl", "shift" })
 				count = count + 100
 			elseif (count < -20) then
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "ctrl" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "ctrl" })
 				count = count + 20
 			elseif (count < -5) then
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "shift" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "shift" })
 				count = count + 5
 			else
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "" })
 				count = count + 1
 			end
 		end
@@ -112,16 +114,16 @@ function CancelExcessStockpile( unitID )
 		local count = stock + queued - MaxStockpile
 		while ( count > 0 ) do
 			if (count > 100) then
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "right", "ctrl", "shift" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "right", "ctrl", "shift" })
 				count = count - 100
 			elseif (count > 20) then
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "right", "ctrl" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "right", "ctrl" })
 				count = count - 20
 			elseif (count > 5) then
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "right", "shift" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "right", "shift" })
 				count = count - 5
 			else
-				GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "right" })
+				GiveOrderToUnit(unitID, CMD.STOCKPILE, emptyTable, { "right" })
 				count = count - 1
 			end
 		end

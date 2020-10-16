@@ -3,12 +3,14 @@ function widget:GetInfo()
     name      = "State Reverse Toggle",
     desc      = "Makes all buttons with 3 or more states reverse toggleable",
     author    = "Google Frog, Deadnight Warrior",
-    date      = "Oct 2, 2009",
+    date      = "Oct 2, 2009, oct 2020",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
     enabled   = true  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 local spGetSelectedUnits = Spring.GetSelectedUnits
 local spGiveOrderToUnit = Spring.GiveOrderToUnit
@@ -28,7 +30,7 @@ function widget:CommandNotify(id, params, options)
 					state = state + #comButton.params - 1
 				end
 				for _,sid in ipairs(units) do
-					spGiveOrderToUnit(sid, id, { state }, {})	
+					spGiveOrderToUnit(sid, id, { state }, emptyTable)	
 				end
 				return true
 			end

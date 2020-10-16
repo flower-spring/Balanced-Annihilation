@@ -4,13 +4,15 @@ function widget:GetInfo()
     name      = "Area unload Fix",
     desc      = "Makes area unloads deterministic with equal distanced drops (not random) ",
     author    = "Doo",
-    date      = "April 2018",
+    date      = "April 2018, oct 2020",
     license   = "GNU GPL, v2 or later",
     handler   = true,
     layer     = 0,
     enabled   = true  --  loaded by default?
   }
 end
+
+local emptyTable = {}
 
 local spGetUnitDefID       = Spring.GetUnitDefID
 --air trans
@@ -87,7 +89,7 @@ function widget:CommandNotify(id, params, options)
 				local phi = (math.sqrt(5)+1)/2        
 				for k=1,#units do
 					if not shift then
-					Spring.GiveOrderToUnit(units[k], CMD.STOP, {}, {})
+					Spring.GiveOrderToUnit(units[k], CMD.STOP, emptyTable, emptyTable)
 					end
 					r = radius(k,#units,b)
 					theta = 2*math.pi*k/phi^2
